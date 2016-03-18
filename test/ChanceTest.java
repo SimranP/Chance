@@ -1,30 +1,20 @@
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class ChanceTest {
 
     @Test
-    public void occurance_should_tell_the_probability_of_tail() throws Exception {
-        Chance chance = new Chance(1,2);
-        assertEquals(0.5,chance.occurrence(),0.001);
+    public void or_should_add_given_chance_and_returns_a_chance_sum() throws Exception {
+        Chance chance = Chance.create(0.2);
+        Chance sum = chance.or(Chance.create(0.6));
+        Assert.assertEquals(sum,Chance.create(0.8));
     }
 
-    @Test
-    public void nonoccurence_should_tell_the_probability_of_not_getting_tail() throws Exception {
-        Chance chance = new Chance(1,2);
-        assertEquals(0.5,chance.nonOccurrence(),0.001);
-    }
 
     @Test
-    public void occurance_should_tell_the_chances_of_getting_tails_when_there_are_two_coins() throws Exception {
-        Chance chance = new Chance(2, 4);
-        assertEquals(0.5,chance.occurrence(),0.001);
-    }
-
-    @Test
-    public void nonoccurence_should_tell_the_chances_of_not_getting_tails_when_there_are_two_coins() throws Exception {
-        Chance chance = new Chance(2, 4);
-        assertEquals(0.5,chance.nonOccurrence(),0.001);
+    public void and_should_multiply_given_chance_and_returns_a_chance_product() throws Exception {
+        Chance chance = Chance.create(0.5);
+        Chance sum = chance.and(Chance.create(0.5));
+        Assert.assertEquals(sum,Chance.create(0.25));
     }
 }
