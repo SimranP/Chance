@@ -1,7 +1,6 @@
 /*
     Job of Chance
-        - should tell the chances of occurrence of by using favourableChances and totalChances.
-        - should tell the chances of not occurring by using favourableChances and totalChances.
+        - should perform all the calculations done between chances.
  */
 
 
@@ -13,9 +12,9 @@ public class Chance {
     }
 
 
-    public static Chance create(double value) throws IllegalArgumentException {
+    public static Chance create(double value) {
         if(value < 0 || value > 1){
-            throw new IllegalArgumentException("Expected value between 0 and 1 but got "+ value);
+            throw new IllegalProbablityValueException("Expected value between 0 and 1 but got "+ value);
         }
         return new Chance(value);
     }
@@ -36,4 +35,9 @@ public class Chance {
     public Chance and(Chance chance) {
         return create(this.value * chance.value);
     }
+
+    public Chance not() {
+        return create(1-value);
+    }
+
 }
